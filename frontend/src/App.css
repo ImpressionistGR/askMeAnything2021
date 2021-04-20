@@ -1,0 +1,81 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.my-btn,
+.my-btn:focus {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #000000 !important;
+}
+
+
+.my-btn:active,
+.my-btn:hover {
+  color: #000000 !important;
+  background-color: #a7a7a7 !important;
+  border-color: #000000 !important;
+}
+
+.my-btn2,
+.my-btn2:focus {
+  color: #ffffff !important;
+  background-color: #e30000 !important;
+  border-color: #e30000 !important;
+}
+
+.my-btn2:active,
+.my-btn2:hover {
+  color: #ffffff !important;
+  background-color: #a50000 !important;
+  border-color: #a50000 !important;
+}
+
+.my-btn3,
+.my-btn3:focus {
+  color: #000000 !important;
+  background-color: #ffffff !important;
+  border-color: #e30000 !important;
+}
+
+.my-btn3:active,
+.my-btn3:hover {
+  color: #000000 !important;
+  background-color: #a7a7a7 !important;
+  border-color: #e30000 !important;
+}
