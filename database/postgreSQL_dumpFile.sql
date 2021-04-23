@@ -3,6 +3,29 @@
 BEGIN;
 
 
+CREATE TABLE public.answer
+(
+    "idAnswer" integer NOT NULL,
+    "textAnswer" character(500)[] NOT NULL,
+    "timeAnswer" timestamp without time zone NOT NULL,
+    PRIMARY KEY ("idAnswer")
+);
+
+CREATE TABLE public.keyword
+(
+    "idKeyword" integer NOT NULL,
+    "nameKeyword" character(45)[] NOT NULL,
+    PRIMARY KEY ("idKeyword")
+);
+
+CREATE TABLE public.question
+(
+    "idQuestion" integer NOT NULL,
+    "textQuestion" character(500)[] NOT NULL,
+    "timeQuestion" timestamp without time zone NOT NULL,
+    PRIMARY KEY ("idQuestion")
+);
+
 CREATE TABLE public."user"
 (
     "idUser" integer NOT NULL,
@@ -14,28 +37,11 @@ CREATE TABLE public."user"
     PRIMARY KEY ("idUser")
 );
 
-CREATE TABLE public.question
-(
-    "idQuestion" integer NOT NULL,
-    "textQuestion" character(500)[] NOT NULL,
-    "timeQuestion" timestamp without time zone NOT NULL,
-    PRIMARY KEY ("idQuestion")
-);
+ALTER TABLE public.answer
+    ADD FOREIGN KEY ("idAnswer")
+    REFERENCES public."user" ("idUser")
+    NOT VALID;
 
-CREATE TABLE public.keyword
-(
-    "idKeyword" integer NOT NULL,
-    "nameKeyword" character(45)[] NOT NULL,
-    PRIMARY KEY ("idKeyword")
-);
-
-CREATE TABLE public.answer
-(
-    "idAnswer" integer NOT NULL,
-    "textAnswer" character(500)[] NOT NULL,
-    "timeAnswer" timestamp without time zone NOT NULL,
-    PRIMARY KEY ("idAnswer")
-);
 
 ALTER TABLE public.question
     ADD FOREIGN KEY ("idQuestion")
@@ -45,13 +51,13 @@ ALTER TABLE public.question
 
 ALTER TABLE public.keyword
     ADD FOREIGN KEY ("idKeyword")
-    REFERENCES public."user" ("idUser")
+    REFERENCES public.question ("idQuestion")
     NOT VALID;
 
 
 ALTER TABLE public.answer
     ADD FOREIGN KEY ("idAnswer")
-    REFERENCES public."user" ("idUser")
+    REFERENCES public.question ("idQuestion")
     NOT VALID;
 
 END;
