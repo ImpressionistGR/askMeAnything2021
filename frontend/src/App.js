@@ -38,38 +38,40 @@ function App() {
                 </div>
             </div>
         </nav>
-        <RB.Nav defaultActiveKey="/home" className="flex-column">
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-            <RB.Nav.Link href="/home">Active</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
-            <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
-        </RB.Nav>
+        <div className="container">
+            <div className="row">
+                <div className="col">
+                    <div class="input-group" style={{padding: '15px'}}>
+                    <input type="search" class="form-control rounded mr-sm-2" placeholder="Search" aria-label="Search"
+                           aria-describedby="search-addon" />
+                    <button type="button" class="btn btn-outline-primary    my-btn">search</button>
+                    </div>
+                    <RB.Nav defaultActiveKey="/home" className="flex-column">
+                        <RB.Nav.Link href="/home">Active</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
+                        <RB.Nav.Link href="/home">Active</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
+                    </RB.Nav>
+                </div>
+                <div className="col">
+                    <div className="input-group" style={{padding: '15px'}}>
+                        <input type="search" className="form-control rounded mr-sm-2" placeholder="Search" aria-label="Search"
+                               aria-describedby="search-addon"/>
+                        <button type="button" className="btn btn-outline-primary my-btn">search</button>
+                    </div>
+                    <RB.Nav defaultActiveKey="/home" className="flex-column">
+                        <RB.Nav.Link href="/home">Active</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
+                        <RB.Nav.Link href="/home">Active</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-1">Link</RB.Nav.Link>
+                        <RB.Nav.Link eventKey="link-2">Link</RB.Nav.Link>
+                    </RB.Nav>
+                </div>
+            </div>
+        </div>
     </div>
   );
 }
