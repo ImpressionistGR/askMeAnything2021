@@ -4,14 +4,14 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
 import LoginModal from "./LoginModal";
+import SignupModal from "./SignupModal";
 
 
 function LandingPage () {
-    const [loginShow, setloginShow] = useState(false)
+    const [loginShow, setLoginShow] = useState(false)
 
     return (
         <div className="App">
-            <LoginModal></LoginModal>
             <div className="App-header">
                 <Container>
                     <Row>

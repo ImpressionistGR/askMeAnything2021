@@ -4,9 +4,7 @@ import logo from "../logo.png";
 import React, {Component, useState} from "react";
 
 
-function LoginModal ( {myShow} ){
-
-
+function SignupModal ( {myShow} ){
 
     return (
         <Modal show={myShow} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
@@ -24,12 +22,13 @@ function LoginModal ( {myShow} ){
             </ModalHeader>
             <ModalBody style={{backgroundColor: "#d3f5ff"}}>
                 <Form>
-                    <FormControl placeholder="username" style={{marginBottom: "10px"}}></FormControl>
+                    <FormControl placeholder="username" style={{marginBottom: "20px"}}></FormControl>
                     <FormControl placeholder="password"></FormControl>
+                    <FormControl placeholder="re enter password"></FormControl>
                 </Form>
             </ModalBody>
             <ModalFooter style={{backgroundColor: "#d3f5ff"}}>
-                <Button variant="light" className="border-dark">Log in</Button>
+                <Button variant="light" className="border-dark">Sign up</Button>
                 <Button variant="danger" className="border-dark" onClick={() => {myShow=false}}>Close</Button>
             </ModalFooter>
         </Modal>
@@ -37,4 +36,4 @@ function LoginModal ( {myShow} ){
 
 }
 
-export default LoginModal;
+export default SignupModal;
