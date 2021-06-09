@@ -5,13 +5,17 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
+import App from "../App";
 
 
 function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
+    const [signupShow, setSignupShow] = useState(false)
 
     return (
         <div className="App">
+            <LoginModal myShow={loginShow} onClose={() => {setLoginShow(false)}}></LoginModal>
+            <SignupModal myShow={signupShow} onClose={() => {setSignupShow(false)}}></SignupModal>
             <div className="App-header">
                 <Container>
                     <Row>
@@ -32,8 +36,8 @@ function LandingPage () {
                             </Navbar>
                         </Col>
                         <Col>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark">Sign up</Button>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark">Log in</Button>
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={() => {setSignupShow(true)}}>Sign up</Button>
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" onClick={() => {setLoginShow(true)}}>Log in</Button>
                         </Col>
                     </Row>
                 </Container>

@@ -4,10 +4,10 @@ import logo from "../logo.png";
 import React, {Component, useState} from "react";
 
 
-function SignupModal ( {myShow} ){
+function SignupModal ( {myShow, onClose} ){
 
     return (
-        <Modal show={myShow} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
+        <Modal show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
             <ModalHeader style={{display: "inline-block", textAlign: "center", backgroundColor: "#d3f5ff"}}>
                 <img
                     alt=""
@@ -29,7 +29,7 @@ function SignupModal ( {myShow} ){
             </ModalBody>
             <ModalFooter style={{backgroundColor: "#d3f5ff"}}>
                 <Button variant="light" className="border-dark">Sign up</Button>
-                <Button variant="danger" className="border-dark" onClick={() => {myShow=false}}>Close</Button>
+                <Button variant="danger" className="border-dark" onClick={onClose}>Close</Button>
             </ModalFooter>
         </Modal>
     );

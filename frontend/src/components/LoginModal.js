@@ -4,12 +4,10 @@ import logo from "../logo.png";
 import React, {Component, useState} from "react";
 
 
-function LoginModal ( {myShow} ){
-
-
+function LoginModal ( {myShow, onClose} ){
 
     return (
-        <Modal show={myShow} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
+        <Modal show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
             <ModalHeader style={{display: "inline-block", textAlign: "center", backgroundColor: "#d3f5ff"}}>
                 <img
                     alt=""
@@ -30,7 +28,7 @@ function LoginModal ( {myShow} ){
             </ModalBody>
             <ModalFooter style={{backgroundColor: "#d3f5ff"}}>
                 <Button variant="light" className="border-dark">Log in</Button>
-                <Button variant="danger" className="border-dark" onClick={() => {myShow=false}}>Close</Button>
+                <Button variant="danger" className="border-dark" onClick={onClose}>Close</Button>
             </ModalFooter>
         </Modal>
     );
