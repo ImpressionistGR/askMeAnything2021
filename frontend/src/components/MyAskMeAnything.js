@@ -1,5 +1,6 @@
 import React, {Component, useState} from 'react';
 import logo from '../logo.png';
+import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
@@ -18,8 +19,6 @@ function LandingPage () {
 
     return (
         <div className="App">
-            <LoginModal myShow={loginShow} onClose={() => {setLoginShow(false)}}></LoginModal>
-            <SignupModal myShow={signupShow} onClose={() => {setSignupShow(false)}}></SignupModal>
             <div className="App-header">
                 <Container>
                     <Row>
@@ -36,11 +35,23 @@ function LandingPage () {
                                 <span className="font-weight-bold">anything</span>
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
                             </Link>
-
                         </Col>
                         <Col>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={() => {setSignupShow(true)}}>Sign up</Button>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" onClick={() => {setLoginShow(true)}}>Log in</Button>
+                            <Link to="/">
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" >Log out</Button>
+                            </Link>
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
+                                <img
+                                    alt=""
+                                    src={user}
+                                    width="20"
+                                    height="20"
+                                />
+                                <span  style={{marginLeft:"5px"}} className="font-weight-bold">@myask</span>
+                                <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
+                                <span className="font-weight-bold">anything</span>
+                                <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
+                            </Button>
                         </Col>
                     </Row>
                 </Container>
@@ -51,7 +62,7 @@ function LandingPage () {
                     <Row>
                         <Col>
                             <Link to="/ask">
-                            <Button variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
+                                <Button variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
                             </Link>
                         </Col>
 

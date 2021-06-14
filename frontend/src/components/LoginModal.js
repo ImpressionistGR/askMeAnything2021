@@ -1,7 +1,8 @@
-import {FormControl, Modal, Form, ModalBody, ModalFooter, Button} from "react-bootstrap";
+import {FormControl, Modal, Form, ModalBody, ModalFooter, Button, NavLink} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import logo from "../logo.png";
 import React, {Component, useState} from "react";
+import {Link, useHistory} from "react-router-dom";
 
 
 function LoginModal ( {myShow, onClose} ){
@@ -23,11 +24,14 @@ function LoginModal ( {myShow, onClose} ){
             <ModalBody style={{backgroundColor: "#d3f5ff"}}>
                 <Form>
                     <FormControl placeholder="username" style={{marginBottom: "10px"}}></FormControl>
-                    <FormControl placeholder="password"></FormControl>
+                    <FormControl type="password" placeholder="password"></FormControl>
+
                 </Form>
             </ModalBody>
             <ModalFooter style={{backgroundColor: "#d3f5ff"}}>
+                <Link to="/home">
                 <Button variant="light" className="border-dark">Log in</Button>
+                </Link>
                 <Button variant="danger" className="border-dark" onClick={onClose}>Close</Button>
             </ModalFooter>
         </Modal>

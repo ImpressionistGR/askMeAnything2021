@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LandingPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LoginModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/SignupModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SignupModal.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +71,9 @@
       <workItem from="1623134149897" duration="8296000" />
       <workItem from="1623158084129" duration="23000" />
       <workItem from="1623158233155" duration="4860000" />
-      <workItem from="1623223366093" duration="1776000" />
+      <workItem from="1623223366093" duration="4165000" />
+      <workItem from="1623491679923" duration="2721000" />
+      <workItem from="1623689008044" duration="2766000" />
     </task>
     <servers />
   </component>
