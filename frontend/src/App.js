@@ -7,6 +7,7 @@ import LandingPage from "./components/LandingPage";
 import LoginModal from "./components/LoginModal";
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import AskQuestion from "./components/AskQuestion";
+import AnswerQuestion from "./components/AnswerQuestion";
 import MyAskMeAnything from "./components/MyAskMeAnything";
 
 
@@ -19,6 +20,7 @@ function App () {
                 <Route exact path="/" component={LandingPage}></Route>
                 <Route path="/ask" component={AskQuestion}></Route>
                 <Route path="/home" component={MyAskMeAnything}></Route>
+                <Route path="/answer" component={AnswerQuestion}></Route>
             </Switch>
 
         </Router>

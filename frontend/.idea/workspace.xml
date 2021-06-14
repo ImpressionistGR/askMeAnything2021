@@ -4,8 +4,10 @@
     <list default="true" id="cac4f237-24a0-4730-a10e-359cdb9e6c46" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AnswerQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AnswerQuestion.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AskQuestion.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AskQuestion.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LandingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/LoginModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/LoginModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MyAskMeAnything.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MyAskMeAnything.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +75,7 @@
       <workItem from="1623158233155" duration="4860000" />
       <workItem from="1623223366093" duration="4165000" />
       <workItem from="1623491679923" duration="2721000" />
-      <workItem from="1623689008044" duration="2766000" />
+      <workItem from="1623689008044" duration="5560000" />
     </task>
     <servers />
   </component>

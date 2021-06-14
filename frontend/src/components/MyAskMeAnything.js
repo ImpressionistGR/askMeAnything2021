@@ -23,7 +23,7 @@ function LandingPage () {
                 <Container>
                     <Row>
                         <Col>
-                            <Link className="nav-link text-dark text-decoration-none" to="/" style={{marginTop:"5px"}}>
+                            <Link className="nav-link text-dark text-decoration-none" to="/home" style={{marginTop:"5px"}}>
                                 <img
                                     alt=""
                                     src={logo}
@@ -62,12 +62,14 @@ function LandingPage () {
                     <Row>
                         <Col>
                             <Link to="/ask">
-                                <Button variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
+                                <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
                             </Link>
                         </Col>
 
                         <Col>
-                            <Button variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
+                            <Link to="/answer">
+                            <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
+                            </Link>
                         </Col>
                     </Row>
                 </Container>
