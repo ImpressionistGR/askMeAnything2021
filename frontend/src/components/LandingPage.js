@@ -1,25 +1,22 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import logo from '../logo.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
+import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootstrap";
 import LoginModal from "./LoginModal";
-import AskQuestion from "./AskQuestion";
 import SignupModal from "./SignupModal";
-import {Link, Route, useHistory} from "react-router-dom";
-import App from "../App";
+import {Link} from "react-router-dom";
 
 
 function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
 
-    const history = useHistory();
 
     return (
         <div className="App">
-            <LoginModal myShow={loginShow} onClose={() => {setLoginShow(false)}}></LoginModal>
-            <SignupModal myShow={signupShow} onClose={() => {setSignupShow(false)}}></SignupModal>
+            <LoginModal myShow={loginShow} onClose={() => {setLoginShow(false)}}/>
+            <SignupModal myShow={signupShow} onClose={() => {setSignupShow(false)}}/>
             <div className="App-header">
                 <Container>
                     <Row>
@@ -47,17 +44,9 @@ function LandingPage () {
 
             <div className="red-header table-responsive">
                 <Container>
-                    <Row>
-                        <Col>
-                            <Link to="/ask">
-                            <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
-                            </Link>
-                        </Col>
-
-                        <Col>
-                            <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
-                        </Col>
-                    </Row>
+                        <Row className="font-weight-bold" style={{display:"inline-block", backgroundColor:"white", borderRadius:"10px", padding:"7px", marginTop:"8px"}}>
+                            Log in or sign up to ask and answer !
+                        </Row>
                 </Container>
             </div>
 
@@ -66,13 +55,13 @@ function LandingPage () {
                 <Row>
                     <Col style={{margin:"20px", borderRight:"1px solid black"}} className="restOfPage">
                         <InputGroup className="w-100">
-                            <FormControl></FormControl>
+                            <FormControl/>
                             <Button variant="light" className="border-dark">Search</Button>
                         </InputGroup>
                     </Col>
                     <Col style={{margin:"20px"}} className="restOfPage">
                         <InputGroup className="w-100">
-                            <FormControl></FormControl>
+                            <FormControl/>
                             <Button variant="light" className="border-dark">Search</Button>
                         </InputGroup>
                     </Col>

@@ -1,7 +1,8 @@
 import {FormControl, Modal, Form, ModalBody, ModalFooter, Button} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import logo from "../logo.png";
-import React, {Component, useState} from "react";
+import React from "react";
+import {Link} from "react-router-dom";
 
 
 function SignupModal ( {myShow, onClose} ){
@@ -22,13 +23,19 @@ function SignupModal ( {myShow, onClose} ){
             </ModalHeader>
             <ModalBody style={{backgroundColor: "#d3f5ff"}}>
                 <Form>
-                    <FormControl placeholder="username" style={{marginBottom: "20px"}}></FormControl>
-                    <FormControl placeholder="password"></FormControl>
-                    <FormControl placeholder="re enter password"></FormControl>
+                    <FormControl placeholder="first name" style={{marginBottom: "20px"}}/>
+                    <FormControl placeholder="last name" style={{marginBottom: "20px"}}/>
+                    <FormControl placeholder="email address" style={{marginBottom: "20px"}}/>
+
+                    <FormControl placeholder="username" style={{marginBottom: "20px"}}/>
+                    <FormControl placeholder="password"/>
+                    <FormControl placeholder="re enter password"/>
                 </Form>
             </ModalBody>
             <ModalFooter style={{backgroundColor: "#d3f5ff"}}>
-                <Button variant="light" className="border-dark">Sign up</Button>
+                <Link to="/home">
+                    <Button variant="light" className="border-dark">Sign up</Button>
+                </Link>
                 <Button variant="danger" className="border-dark" onClick={onClose}>Close</Button>
             </ModalFooter>
         </Modal>

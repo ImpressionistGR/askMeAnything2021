@@ -1,14 +1,10 @@
-import React, {Component, useState} from 'react';
+import React from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
-import LoginModal from "./LoginModal";
-import AskQuestion from "./AskQuestion";
-import SignupModal from "./SignupModal";
-import {Link, Route, useHistory} from "react-router-dom";
-import App from "../App";
+import {Button, Container, Row, Col, Form, FormControl} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 
 function LandingPage () {
