@@ -1,14 +1,10 @@
-import React, {Component, useState} from 'react';
+import React, {useState} from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, Form, FormControl, InputGroup, Navbar, NavLink} from "react-bootstrap";
-import LoginModal from "./LoginModal";
-import AskQuestion from "./AskQuestion";
-import SignupModal from "./SignupModal";
-import {Link, Route, useHistory} from "react-router-dom";
-import App from "../App";
+import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootstrap";
+import {Link, useHistory} from "react-router-dom";
 
 
 function LandingPage () {
@@ -80,13 +76,13 @@ function LandingPage () {
                 <Row>
                     <Col style={{margin:"20px", borderRight:"1px solid black"}} className="restOfPage">
                         <InputGroup className="w-100">
-                            <FormControl></FormControl>
+                            <FormControl/>
                             <Button variant="light" className="border-dark">Search</Button>
                         </InputGroup>
                     </Col>
                     <Col style={{margin:"20px"}} className="restOfPage">
                         <InputGroup className="w-100">
-                            <FormControl></FormControl>
+                            <FormControl/>
                             <Button variant="light" className="border-dark">Search</Button>
                         </InputGroup>
                     </Col>
