@@ -1,7 +1,14 @@
 const express = require('express')
 const app = express()
-const port = 8081
+const port = 8080
 const mysql = require('mysql2')
+const cors = require('cors')
+//const bodyParser = require('body-parser')
+//const axios = require('axios')
+
+app.use(express.json())
+//app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cors())
 
 
 const connection = mysql.createConnection({
@@ -17,52 +24,56 @@ connection.connect(function(err) {
   console.log("Connected!");
 });
 
-connection.query('SELECT *FROM user', function (err, rows, fields) {
-  if (err) throw err
 
-  console.log('The user rows are: ', rows)
+
+app.post('/login', (req,res) => {
+  const username = req.body.username
+  const password = req.body.password
+
+  console.log(req.body)
+  console.log(username)
+  console.log(password)
+
+  connection.query(
+      "SELECT *FROM user WHERE username = ? and password = ?",
+      [username, password],
+      (err, result) => {
+        if(err) throw err
+        //if(result.length > 0){
+          console.log(result)
+          res.send(result)
+        //}
+
+      })
+  //res.send('id: ' + username + ', ' + password);
 })
 
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
+app.post('/signup', (req,res) => {
+  const username = req.body.username
+  const email = req.body.email
+  const password = req.body.password
+
+
+  console.log(req.body)
+  console.log(username)
+  console.log(email)
+  console.log(password)
+
+  connection.query(
+      "INSERT INTO user (iduser, username, email, password) VALUES (NULL, ?, ?, ?)",
+      [username, email, password],
+      (err, result) => {
+        if(err) throw err
+        //if(result.length > 0){
+        console.log(result)
+        res.send(result)
+        //}
+
+      })
+  //res.send('id: ' + username + ', ' + password);
 })
 
-app.get('/hey', (req, res) => {
-  res.send('ho')
-})
-
-app.get('/login', (req,res) => {
-  //connection.query('SELECT *FROM user WHERE username=name and password=passw')
-  let endPoint = req.url
-  let usern = ''
-  let passw = ''
-  for(let i=0; i<endPoint.length; i++){
-    if(endPoint[i] == '?'){
-      i++
-      while(endPoint[i] != '&'){
-        usern += endPoint[i]
-        i++
-      }
-    }
-    if(endPoint[i] == '&'){
-      i++
-      while(i < endPoint.length){
-        passw += endPoint[i]
-        i++
-      }
-    }
-  }
-
-  connection.query('SELECT *FROM user WHERE username= "' + usern + '" AND password= "' + passw +'"', function (err, result) {
-    if (err) throw err
-
-    console.log('The user rows are: ', result)
-  })
-
-
-  res.send('id: ' + usern + ', ' + passw);
-})
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)

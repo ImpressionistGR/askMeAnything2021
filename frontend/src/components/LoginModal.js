@@ -1,12 +1,50 @@
 import {FormControl, Modal, Form, ModalBody, ModalFooter, Button} from "react-bootstrap";
 import ModalHeader from "react-bootstrap/ModalHeader";
 import logo from "../logo.png";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useHistory } from 'react-router-dom';
 import {Link} from "react-router-dom";
 import axios from "axios";
+import LandingPage from "./AskQuestion";
+import MyAskMeAnything from "./MyAskMeAnything";
 
 
 function LoginModal ( {myShow, onClose} ){
+
+    const [toHome, setToHome] = useState(false)
+    const history = useHistory()
+
+
+
+    useEffect(() => {
+        console.log('loading');
+        console.log(toHome)
+        if(toHome){
+            history.push('/home')
+        }
+        // This is be executed when the state changes
+    }, [toHome]);
+
+
+
+    function login(username, password){
+        axios.post(
+            '/login',  {username, password}).then(response =>{
+            console.log(response)
+            console.log(response.data[0])
+            const data = response.data[0]
+            if(data == undefined){
+                alert('wrong credentials')
+                console.log('wrong credentials')
+            }
+            else{
+                setToHome(true)
+
+            }
+
+        })
+    }
+
 
 
     class LoginForm extends React.Component{
@@ -27,10 +65,21 @@ function LoginModal ( {myShow, onClose} ){
         }
 
         handleSubmit(event) {
-            login(this.state.username, this.state.password)
+            if(this.state.username == ' ' || this.state.password == ''){
+                alert('username and password cannot be empty')
+            }
+            else {
+                login(this.state.username, this.state.password)
+            }
             //alert('Credentials were submitted: (' + this.state.username + ', ' + this.state.password + ')');
-            console.log(this.state.username)
-            console.log(this.state.password)
+            //console.log(this.state.username)
+            //console.log(this.state.password)
+            /*console.log(toHome)
+            if(toHome == 1){
+                console.log('toHome')
+                //history.push('/home')
+                //return <MyAskMeAnything/>
+            }*/
             event.preventDefault();
         }
 
@@ -51,12 +100,6 @@ function LoginModal ( {myShow, onClose} ){
         }
     }
 
-
-    function login(username, password){
-        axios.get('/login?' + username + '&' + password).then(response =>{
-            console.log(response)
-        })
-    }
 
     return (
         <Modal show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
