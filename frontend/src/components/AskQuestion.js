@@ -4,10 +4,16 @@ import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, Form, FormControl} from "react-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 
 
-function LandingPage () {
+function AskQuestion () {
+
+    const history = useHistory();
+
+    if(document.cookie === 'no' || document.cookie === ''){
+        history.push('/')
+    }
 
     return (
         <div className="App">
@@ -81,4 +87,4 @@ function LandingPage () {
     )
 }
 
-export default LandingPage;
+export default AskQuestion;

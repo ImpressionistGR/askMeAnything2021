@@ -12,6 +12,7 @@ function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
 
+    document.cookie = 'no'
 
     return (
         <div className="App">

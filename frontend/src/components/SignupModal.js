@@ -13,13 +13,14 @@ function SignupModal ( {myShow, onClose} ){
         axios.post(
             '/signup',  {username, email, password}).then(response =>{
             console.log(response)
-            console.log(response.data[0])
-            const data = response.data[0]
-            if(data == undefined){
+            console.log(response.data.affectedRows)
+            const data = response.data.affectedRows
+            if(data === 0){
                 alert('wrong credentials')
                 console.log('wrong credentials')
             }
             else{
+                alert('signup successful')
                 console.log('signup successful')
 
             }
@@ -55,13 +56,13 @@ function SignupModal ( {myShow, onClose} ){
         }
 
         handleSubmit(event){
-            if(this.state.username == ' ' || this.state.email == '' || this.state.password == ' ' || this.state.rePassword == ''){
+            if(this.state.username === ' ' || this.state.email === '' || this.state.password === ' ' || this.state.rePassword === ''){
                 alert('input fields cannot be empty')
             }
-            else if(this.state.password != this.state.rePassword) {
+            else if(this.state.password !== this.state.rePassword) {
                 alert('Passwords do not match')
             }
-            else if(this.state.password == this.state.rePassword) {
+            else if(this.state.password === this.state.rePassword) {
                 signup(this.state.username, this.state.email, this.state.password)
             }
 

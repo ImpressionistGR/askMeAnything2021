@@ -7,11 +7,22 @@ import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootst
 import {Link, useHistory} from "react-router-dom";
 
 
+
+
 function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
 
     const history = useHistory();
+
+    function showCookies() {
+        console.log('cookie: ' + document.cookie)
+    }
+
+    if(document.cookie === 'no' || document.cookie === ''){
+        history.push('/')
+    }
+
 
     return (
         <div className="App">
@@ -34,7 +45,7 @@ function LandingPage () {
                         </Col>
                         <Col>
                             <Link to="/">
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" >Log out</Button>
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={showCookies}>Log out</Button>
                             </Link>
                             <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
                                 <img

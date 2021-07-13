@@ -33,11 +33,13 @@ function LoginModal ( {myShow, onClose} ){
             console.log(response)
             console.log(response.data[0])
             const data = response.data[0]
-            if(data == undefined){
+            if(data === undefined){
                 alert('wrong credentials')
                 console.log('wrong credentials')
             }
             else{
+                //const usernameCookie = data.username
+                document.cookie = 'yes' //cookie for authentication
                 setToHome(true)
 
             }
@@ -65,7 +67,7 @@ function LoginModal ( {myShow, onClose} ){
         }
 
         handleSubmit(event) {
-            if(this.state.username == ' ' || this.state.password == ''){
+            if(this.state.username === ' ' || this.state.password === ''){
                 alert('username and password cannot be empty')
             }
             else {
