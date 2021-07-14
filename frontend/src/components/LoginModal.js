@@ -39,7 +39,8 @@ function LoginModal ( {myShow, onClose} ){
             }
             else{
                 //const usernameCookie = data.username
-                document.cookie = 'yes' //cookie for authentication
+                document.cookie = 'auth=yes' //cookie for authentication
+                document.cookie = 'username=' + username
                 setToHome(true)
 
             }

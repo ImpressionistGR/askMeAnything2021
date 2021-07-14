@@ -1,25 +1,26 @@
-import React, {useState} from 'react';
+import React from 'react';
 import logo from '../logo.png';
+import 'jaaulde-cookies'
 import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootstrap";
+import {Button, Container, Row, Col, FormControl, InputGroup, DropdownButton, Dropdown} from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
+import {getCookie} from "../cookies";
 
 
 
-
-function LandingPage () {
-    const [loginShow, setLoginShow] = useState(false)
-    const [signupShow, setSignupShow] = useState(false)
-
+function MyAskMeAnything () {
     const history = useHistory();
 
-    function showCookies() {
+    function logout() {
         console.log('cookie: ' + document.cookie)
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
-    if(document.cookie === 'no' || document.cookie === ''){
+
+    //const auth = cookies.get('auth')
+    if(getCookie('auth') === 'no' || getCookie('auth') === ''){
         history.push('/')
     }
 
@@ -45,9 +46,10 @@ function LandingPage () {
                         </Col>
                         <Col>
                             <Link to="/">
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={showCookies}>Log out</Button>
+                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={logout}>Log out</Button>
                             </Link>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
+                            <Dropdown  style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
+                                <Dropdown.Toggle variant="light" className="border-dark" bsPrefix="p-2">
                                 <img
                                     alt=""
                                     src={user}
@@ -58,7 +60,11 @@ function LandingPage () {
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
                                 <span className="font-weight-bold">anything</span>
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
-                            </Button>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="border-dark">
+                                    <Dropdown.Item>Hello {getCookie('username')} !</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </Col>
                     </Row>
                 </Container>
@@ -104,4 +110,4 @@ function LandingPage () {
     )
 }
 
-export default LandingPage;
+export default MyAskMeAnything;

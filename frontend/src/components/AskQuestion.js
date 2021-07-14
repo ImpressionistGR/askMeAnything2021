@@ -3,16 +3,24 @@ import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, Form, FormControl} from "react-bootstrap";
+import {Button, Container, Row, Col, Form, FormControl, Dropdown} from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
+import {getCookie} from "../cookies";
 
 
 function AskQuestion () {
 
     const history = useHistory();
 
-    if(document.cookie === 'no' || document.cookie === ''){
+
+    //const auth = cookies.get('auth')
+    if(getCookie('auth') === 'no' || getCookie('auth') === ''){
         history.push('/')
+    }
+
+    function logout() {
+        console.log('cookie: ' + document.cookie)
+        document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
     return (
@@ -36,20 +44,25 @@ function AskQuestion () {
                         </Col>
                         <Col>
                             <Link to="/">
-                                <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" >Log out</Button>
+                                <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={logout}>Log out</Button>
                             </Link>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
-                                <img
-                                    alt=""
-                                    src={user}
-                                    width="20"
-                                    height="20"
-                                />
-                                <span  style={{marginLeft:"5px"}} className="font-weight-bold">@myask</span>
-                                <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
-                                <span className="font-weight-bold">anything</span>
-                                <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
-                            </Button>
+                            <Dropdown  style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
+                                <Dropdown.Toggle variant="light" className="border-dark" bsPrefix="p-2">
+                                    <img
+                                        alt=""
+                                        src={user}
+                                        width="20"
+                                        height="20"
+                                    />
+                                    <span  style={{marginLeft:"5px"}} className="font-weight-bold">@myask</span>
+                                    <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
+                                    <span className="font-weight-bold">anything</span>
+                                    <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu className="border-dark">
+                                    <Dropdown.Item>Username: {getCookie('username')}</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
                         </Col>
                     </Row>
                 </Container>
