@@ -1,19 +1,43 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, Form, FormControl, Dropdown} from "react-bootstrap";
+import {Button, Container, Row, Col, Form, FormControl, Dropdown, Modal, ModalFooter} from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
+import ModalHeader from "react-bootstrap/ModalHeader";
+import axios from "axios";
 
 
 function AskQuestion () {
 
     const history = useHistory();
 
+    /*
+    const [nevermindShow, setNevermindShow] = useState(false)
+    const handleClose = () => setNevermindShow(false);
+    const handleShow = () => setNevermindShow(true);
 
-    //const auth = cookies.get('auth')
+    function NevermindModal () {
+
+        return (
+            <Modal show={nevermindShow} onHide={handleClose}>
+                <ModalHeader style={{display: "inline-block", textAlign: "center", backgroundColor: "#d3f5ff"}}>
+                    Your progress will be lost.
+                    Are you sure?
+                </ModalHeader>
+                <ModalFooter>
+                    <Button variant="danger" className="border-dark">Yes</Button>
+                    <Button variant="light" className="border-dark">No</Button>
+                </ModalFooter>
+            </Modal>
+        )
+
+    }
+    */
+
+
     if(getCookie('auth') === 'no' || getCookie('auth') === ''){
         history.push('/')
     }
@@ -21,6 +45,75 @@ function AskQuestion () {
     function logout() {
         console.log('cookie: ' + document.cookie)
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    }
+
+
+    function ask(title, text, keywords) {
+        axios.post(
+            '/askQuestion', {title, text, keywords}).then(response =>{
+            console.log(response)
+            //console.log(response.data[0])
+        })
+    }
+
+    class AskForm extends React.Component{
+        constructor(props) {
+            super(props);
+
+            this.state = { title: '', text: '', keywords: ''}
+
+            this.handleChangeTitle = this.handleChangeTitle.bind(this)
+            this.handleChangeText = this.handleChangeText.bind(this)
+            this.handleChangeKeywords = this.handleChangeKeywords.bind(this)
+
+            this.handleSubmit = this.handleSubmit.bind(this)
+        }
+
+        handleChangeTitle(event){
+            this.setState({title: event.target.value})
+
+        }
+
+        handleChangeText(event){
+            this.setState({text: event.target.value})
+        }
+
+        handleChangeKeywords(event){
+            this.setState({keywords: event.target.value})
+
+        }
+
+        handleSubmit(event){
+            if(this.state.title === '' || this.state.text === '' || this.state.keywords === ''){
+                alert('input fields cannot be empty')
+            }
+            else{
+                ask(this.state.title, this.state.text, this.state.keywords)
+            }
+            event.preventDefault();
+        }
+
+
+        render() {
+            return (
+                <Form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <FormControl as="textarea" placeholder="Question title" value={this.state.title} onChange={this.handleChangeTitle} style={{height:"50px", margin:"15px", marginTop:"25px"}}/>
+                    </Row>
+                    <Row>
+                        <FormControl as="textarea" placeholder="Question text" value={this.state.text} onChange={this.handleChangeText} style={{height:"150px", margin:"15px"}}/>
+                    </Row>
+                    <Row>
+                        <FormControl as="textarea" placeholder="Keywords" value={this.state.keywords} onChange={this.handleChangeKeywords} style={{height:"50px", margin:"15px"}}/>
+                    </Row>
+                    <Row style={{margin:"0px"}}>
+                        <Button variant="light" type="submit" className="border-dark" >Submit</Button>
+                        &nbsp; &nbsp;
+                        <Button variant="danger" type="button" className="border-dark" onClick={() => {history.push('/home')}}>Nevermind</Button>
+                    </Row>
+                </Form>
+            )
+        }
     }
 
     return (
@@ -78,22 +171,7 @@ function AskQuestion () {
 
 
             <Container className="restOfPage">
-                <Form>
-                    <Row>
-                        <FormControl as="textarea" placeholder="Question title" style={{height:"50px", margin:"15px", marginTop:"25px"}}/>
-                    </Row>
-                    <Row>
-                        <FormControl as="textarea" placeholder="Question text" style={{height:"150px", margin:"15px"}}/>
-                    </Row>
-                    <Row>
-                        <FormControl as="textarea" placeholder="Keywords" style={{height:"50px", margin:"15px"}}/>
-                    </Row>
-                    <Row style={{margin:"0px"}}>
-                    <Button variant="light" className="border-dark">Submit</Button>
-                        &nbsp; &nbsp;
-                    <Button variant="danger" className="border-dark">Nevermind</Button>
-                    </Row>
-                </Form>
+                <AskForm/>
             </Container>
 
         </div>

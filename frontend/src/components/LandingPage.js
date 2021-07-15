@@ -5,14 +5,19 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
+import {getCookie} from "../cookies";
 
 
 function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
 
-    document.cookie = 'auth=no'
+    const history = useHistory()
+
+    if(getCookie('username') !== '' && getCookie('auth') === 'yes') history.push('/home')
+    else document.cookie = 'auth=no'
+
 
     return (
         <div className="App">

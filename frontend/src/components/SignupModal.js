@@ -2,7 +2,7 @@ import {FormControl, Modal, Form, ModalBody, ModalFooter, Button} from "react-bo
 import ModalHeader from "react-bootstrap/ModalHeader";
 import logo from "../logo.png";
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import axios from "axios";
 
 
@@ -13,16 +13,19 @@ function SignupModal ( {myShow, onClose} ){
         axios.post(
             '/signup',  {username, email, password}).then(response =>{
             console.log(response)
-            console.log(response.data.affectedRows)
-            const data = response.data.affectedRows
-            if(data === 0){
-                alert('wrong credentials')
-                console.log('wrong credentials')
-            }
-            else{
-                alert('signup successful')
-                console.log('signup successful')
-
+            const checkUsername = response.data
+            if(checkUsername === 'username already exists') alert(checkUsername)
+            else {
+                //console.log(response.data.affectedRows)
+                const data = response.data.affectedRows
+                if (data === 0) {
+                    alert('wrong credentials')
+                    console.log('wrong credentials')
+                } else {
+                    alert('signup successful')
+                    console.log('signup successful')
+                    onClose()
+                }
             }
 
         })
@@ -56,14 +59,22 @@ function SignupModal ( {myShow, onClose} ){
         }
 
         handleSubmit(event){
-            if(this.state.username === ' ' || this.state.email === '' || this.state.password === ' ' || this.state.rePassword === ''){
+            //const mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+            const mailFormat = /\S+@\S+\.\S+/;
+            const email = this.state.email
+            //if(mailFormat.test(email)) console.log('email valid')
+            //else console.log('email invalid')
+            if(this.state.username === '' || this.state.email === '' || this.state.password === '' || this.state.rePassword === ''){
                 alert('input fields cannot be empty')
             }
             else if(this.state.password !== this.state.rePassword) {
                 alert('Passwords do not match')
             }
             else if(this.state.password === this.state.rePassword) {
-                signup(this.state.username, this.state.email, this.state.password)
+                if(!mailFormat.test(email)){
+                    alert('invalid email')
+                }
+                else signup(this.state.username, this.state.email, this.state.password)
             }
 
 
@@ -93,7 +104,7 @@ function SignupModal ( {myShow, onClose} ){
     }
 
     return (
-        <Modal show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
+        <Modal onHide={onClose} show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
             <ModalHeader style={{display: "inline-block", textAlign: "center", backgroundColor: "#d3f5ff"}}>
                 <img
                     alt=""

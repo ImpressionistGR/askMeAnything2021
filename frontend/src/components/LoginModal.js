@@ -68,7 +68,7 @@ function LoginModal ( {myShow, onClose} ){
         }
 
         handleSubmit(event) {
-            if(this.state.username === ' ' || this.state.password === ''){
+            if(this.state.username === '' || this.state.password === ''){
                 alert('username and password cannot be empty')
             }
             else {
@@ -105,7 +105,7 @@ function LoginModal ( {myShow, onClose} ){
 
 
     return (
-        <Modal show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
+        <Modal onHide={onClose} show={myShow} onEscapeKeyDown={onClose} style={{fontSize: "20px", fontFamily: "Ubuntu"}} >
             <ModalHeader style={{display: "inline-block", textAlign: "center", backgroundColor: "#d3f5ff"}}>
                 <img
                     alt=""

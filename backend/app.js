@@ -31,8 +31,8 @@ app.post('/login', (req,res) => {
   const password = req.body.password
 
   console.log(req.body)
-  console.log(username)
-  console.log(password)
+  console.log('post login:' + username)
+  console.log('post login:' + password)
 
   connection.query(
       "SELECT *FROM user WHERE username = ? and password = ?",
@@ -40,12 +40,11 @@ app.post('/login', (req,res) => {
       (err, result) => {
         if(err) throw err
         //if(result.length > 0){
-          console.log(result)
-          res.send(result)
+        console.log(result)
+        res.send(result)
         //}
 
       })
-  //res.send('id: ' + username + ', ' + password);
 })
 
 
@@ -56,24 +55,53 @@ app.post('/signup', (req,res) => {
 
 
   console.log(req.body)
-  console.log(username)
-  console.log(email)
-  console.log(password)
+  console.log('post signup: ' + username)
+  console.log('post signup: ' + email)
+  console.log('post signup: ' + password)
 
   connection.query(
-      "INSERT INTO user (iduser, username, email, password) VALUES (NULL, ?, ?, ?)",
-      [username, email, password],
+      'SELECT *FROM user WHERE username=?',
+      [username],
       (err, result) => {
-        if(err) throw err
-        //if(result.length > 0){
-        console.log(result)
-        res.send(result)
-        //}
+          if(err) throw err
+          console.log(result)
+          if(result.length > 0){
+              res.send('username already exists')
+          }
+          else if(result.length === 0){
+              console.log('username available')
+              connection.query(
+                  "INSERT INTO user (iduser, username, email, password) VALUES (NULL, ?, ?, ?)",
+                  [username, email, password],
+                  (err, result) => {
+                      if(err) throw err
+                      //if(result.length > 0){
+                      console.log(result)
+                      res.send(result)
+                      //}
 
-      })
-  //res.send('id: ' + username + ', ' + password);
+                  })
+          }
+
+      }
+  )
+
 })
 
+
+app.post('/askQuestion', (req, res)=>{
+    const title = req.body.title
+    const text = req.body.text
+    const keywords = req.body.keywords
+
+    console.log('ask title: ' + title)
+    console.log('ask text: ' + text)
+    console.log('ask keywords: ' + keywords)
+
+
+
+    res.send('ok')
+})
 
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
