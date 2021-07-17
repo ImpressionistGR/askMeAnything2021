@@ -93,14 +93,88 @@ app.post('/askQuestion', (req, res)=>{
     const title = req.body.title
     const text = req.body.text
     const keywords = req.body.keywords
+    const iduser = req.body.iduser
+    let idQuestion = 0
 
     console.log('ask title: ' + title)
     console.log('ask text: ' + text)
     console.log('ask keywords: ' + keywords)
+    console.log('ask iduser: ' + iduser)
+
+    const keywordsArr = keywords.split(' ')
+    console.log('ask keywordsArr: ' + keywordsArr)
+    const dateTime = new Date
+    console.log('ask date: ' + dateTime)
+
+    connection.query(
+        'SELECT *FROM question WHERE title=? ',
+        [title],
+        (err, result) => {
+            if(err) throw err
+            if(result.length > 0){
+                res.send('question title already exists')
+            }
+            else{
+                connection.query(
+                    'INSERT INTO question VALUES(NULL, ?, ?, ?, ?)',
+                    [title, text, dateTime, iduser],
+                    (err, result) => {
+                        if(err) throw err
+                        console.log(result)
+                        if(result){
+                            connection.query(
+                                'SELECT *FROM question WHERE title=? ',
+                                [title],
+                                (err, result) => {
+                                    if(err) throw err
+                                    console.log(result)
+
+
+                                    if(result){
+                                        idQuestion = parseInt(result[0].idquestion)
+                                        console.log('idquestion: ' + idQuestion)
+                                        keywordsArr.forEach( (value, index, array) => {
+                                            connection.query(
+                                                'INSERT INTO keyword VALUES(NULL, ?, ?, ?)',
+                                                [value, idQuestion, iduser],
+                                                (err, result) => {
+                                                    if(err) throw err
+                                                    console.log(result)
+                                                    //res.send(result)
+                                                }
+                                            )
+                                        })
+                                    }
+
+                                }
+                            )
+
+
+                        }
+                        res.send(result)
+                    }
+                )
 
 
 
-    res.send('ok')
+
+
+
+
+            }
+        }
+
+
+    )
+
+
+
+
+    /*
+
+     */
+
+    //res.send('ok')
 })
 
 app.listen(port, () => {

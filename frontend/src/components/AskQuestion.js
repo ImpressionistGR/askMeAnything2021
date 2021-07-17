@@ -48,10 +48,12 @@ function AskQuestion () {
     }
 
 
-    function ask(title, text, keywords) {
+    function ask(title, text, keywords, iduser) {
         axios.post(
-            '/askQuestion', {title, text, keywords}).then(response =>{
+            '/askQuestion', {title, text, keywords, iduser}).then(response =>{
             console.log(response)
+            const checkTitle = response.data
+            if(checkTitle === 'question title already exists') alert(checkTitle)
             //console.log(response.data[0])
         })
     }
@@ -88,7 +90,8 @@ function AskQuestion () {
                 alert('input fields cannot be empty')
             }
             else{
-                ask(this.state.title, this.state.text, this.state.keywords)
+                const iduser = getCookie('iduser')
+                ask(this.state.title, this.state.text, this.state.keywords, iduser)
             }
             event.preventDefault();
         }

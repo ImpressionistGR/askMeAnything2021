@@ -38,9 +38,12 @@ function LoginModal ( {myShow, onClose} ){
                 console.log('wrong credentials')
             }
             else{
+                const iduser = response.data[0].iduser
+                //console.log(iduser)
                 //const usernameCookie = data.username
                 document.cookie = 'auth=yes' //cookie for authentication
                 document.cookie = 'username=' + username
+                document.cookie = 'iduser=' + iduser
                 setToHome(true)
 
             }
