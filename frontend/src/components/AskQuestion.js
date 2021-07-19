@@ -144,7 +144,7 @@ function AskQuestion () {
                                 <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={logout}>Log out</Button>
                             </Link>
                             <Dropdown  style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
-                                <Dropdown.Toggle variant="light" className="border-dark" bsPrefix="p-2">
+                                <Dropdown.Toggle variant="light" className="border-dark" >
                                     <img
                                         alt=""
                                         src={user}

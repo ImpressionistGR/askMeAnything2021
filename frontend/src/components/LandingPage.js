@@ -31,8 +31,7 @@ function LandingPage () {
                                 <img
                                     alt=""
                                     src={logo}
-                                    width="65"
-                                    height="65"
+                                    className="App-logo"
                                 />
                                 <span  style={{marginLeft:"5px"}} className="font-weight-bold">@ask</span>
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
@@ -41,8 +40,8 @@ function LandingPage () {
                             </Link>
                         </Col>
                         <Col>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={() => {setSignupShow(true)}}>Sign up</Button>
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" onClick={() => {setLoginShow(true)}}>Log in</Button>
+                            <Button variant="danger" className="border-dark login-signup-buttons" onClick={() => {setSignupShow(true)}}>Sign up</Button>
+                            <Button variant="light" className="border-dark login-signup-buttons" onClick={() => {setLoginShow(true)}}>Log in</Button>
                         </Col>
                     </Row>
                 </Container>

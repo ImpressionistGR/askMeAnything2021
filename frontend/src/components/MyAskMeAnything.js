@@ -35,8 +35,7 @@ function MyAskMeAnything () {
                                 <img
                                     alt=""
                                     src={logo}
-                                    width="65"
-                                    height="65"
+                                    className="App-logo"
                                 />
                                 <span  style={{marginLeft:"5px"}} className="font-weight-bold">@ask</span>
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
@@ -46,20 +45,20 @@ function MyAskMeAnything () {
                         </Col>
                         <Col>
                             <Link to="/">
-                            <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={logout}>Log out</Button>
+                                <Button variant="danger" className="border-dark login-signup-buttons" onClick={logout}>Log out</Button>
                             </Link>
-                            <Dropdown  style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
-                                <Dropdown.Toggle variant="light" className="border-dark" bsPrefix="p-2">
+                            <Dropdown  variant="light" className="border-dark">
+                                <Dropdown.Toggle $enable variant="light" className="border-dark my-ask-button" >
                                 <img
                                     alt=""
                                     src={user}
                                     width="20"
                                     height="20"
                                 />
-                                <span  style={{marginLeft:"5px"}} className="font-weight-bold">@myask</span>
-                                <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
-                                <span className="font-weight-bold">anything</span>
-                                <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
+                                <span  style={{marginLeft:"5px"}} className="font-weight-bold my-ask-text">@myask</span>
+                                <span className="font-weight-bold my-ask-text" style={{color:"#e30000"}}>me</span>
+                                <span className="font-weight-bold my-ask-text">anything</span>
+                                <span className="font-weight-bold my-ask-text" style={{color:"#e30000"}}>2021</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu className="border-dark">
                                     <Dropdown.Item>Hello {getCookie('username')} !</Dropdown.Item>
@@ -75,13 +74,13 @@ function MyAskMeAnything () {
                     <Row>
                         <Col>
                             <Link to="/ask">
-                                <Button type="submit" variant="primary" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
+                                <Button type="submit" variant="primary" className="border-dark ask-answer-buttons">Ask a question</Button>
                             </Link>
                         </Col>
 
                         <Col>
                             <Link to="/answer">
-                            <Button type="submit" variant="primary" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
+                            <Button type="submit" variant="primary" className="border-dark ask-answer-buttons" >Answer a question</Button>
                             </Link>
                         </Col>
                     </Row>
