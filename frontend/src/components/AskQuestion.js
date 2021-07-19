@@ -55,6 +55,7 @@ function AskQuestion () {
             const checkTitle = response.data
             if(checkTitle === 'question title already exists') alert(checkTitle)
             //console.log(response.data[0])
+            else alert('question submitted successfully')
         })
     }
 
@@ -86,7 +87,7 @@ function AskQuestion () {
         }
 
         handleSubmit(event){
-            if(this.state.title === '' || this.state.text === '' || this.state.keywords === ''){
+            if(!this.state.title.trim() || !this.state.text.trim() || !this.state.keywords.trim()){
                 alert('input fields cannot be empty')
             }
             else{
@@ -164,10 +165,10 @@ function AskQuestion () {
                 </Container>
             </div>
 
-            <div className="red-header table-responsive">
+            <div className="red-header">
                 <Container>
-                    <Row className="font-weight-bold" style={{display:"inline-block", backgroundColor:"white", borderRadius:"10px", padding:"7px", marginTop:"8px"}}>
-                        Your questions help our community !
+                    <Row className="font-weight-bold" style={{justifyContent:"center"}}>
+                        <p className="white-banner">Your questions help our community !</p>
                     </Row>
                 </Container>
             </div>

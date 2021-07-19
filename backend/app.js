@@ -134,15 +134,17 @@ app.post('/askQuestion', (req, res)=>{
                                         idQuestion = parseInt(result[0].idquestion)
                                         console.log('idquestion: ' + idQuestion)
                                         keywordsArr.forEach( (value, index, array) => {
-                                            connection.query(
-                                                'INSERT INTO keyword VALUES(NULL, ?, ?, ?)',
-                                                [value, idQuestion, iduser],
-                                                (err, result) => {
-                                                    if(err) throw err
-                                                    console.log(result)
-                                                    //res.send(result)
-                                                }
-                                            )
+                                            if(value.trim()) {
+                                                connection.query(
+                                                    'INSERT INTO keyword VALUES(NULL, ?, ?, ?)',
+                                                    [value, idQuestion, iduser],
+                                                    (err, result) => {
+                                                        if (err) throw err
+                                                        console.log(result)
+                                                        //res.send(result)
+                                                    }
+                                                )
+                                            }
                                         })
                                     }
 
@@ -154,13 +156,6 @@ app.post('/askQuestion', (req, res)=>{
                         res.send(result)
                     }
                 )
-
-
-
-
-
-
-
             }
         }
 

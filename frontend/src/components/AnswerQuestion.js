@@ -66,32 +66,33 @@ function AnswerQuestion () {
                 </Container>
             </div>
 
-            <div className="red-header table-responsive">
+            <div className="red-header">
                 <Container>
-                    <Row className="font-weight-bold" style={{display:"inline-block", backgroundColor:"white", borderRadius:"10px", padding:"7px", marginTop:"8px"}}>
-                        Your answers are valuable!
+                    <Row className="font-weight-bold" style={{justifyContent:"center"}}>
+                        <p className="white-banner">Your answers are valuable!</p>
                     </Row>
                 </Container>
             </div>
 
 
             <Container className="restOfPage">
-                <Form>
-                    <Row style={{ marginTop:"25px"}}>
-                        <Col>
-                            <FormControl placeholder="Keywords" />
-                        </Col>
-                        <Col>
-                            <FormControl placeholder="Question title"/>
-                        </Col>
-                        <Col>
-                            <Button type="submit" variant="light" className="border-dark">Search</Button>
-                        </Col>
+                <Form style={{display:"inline-block" ,width:"100%"}}>
+                    <Row style={{ margin:"10px", marginTop:"25px"}}>
+                        <FormControl placeholder="Keywords" />
                     </Row>
+                    <Row style={{ margin:"10px"}}>
+                        <FormControl placeholder="Question title"/>
+                    </Row>
+                    <div style={{float:"right"}}>
+                    <Row>
+                        <Button style={{ margin:"30px", width:"150px"}} type="submit" variant="light" className="border-dark">Search</Button>
+                    </Row>
+                    </div>
+
                 </Form>
 
 
-
+                <div>
                 <Form>
                     <Row>
                         <FormControl as="textarea" placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
@@ -99,9 +100,10 @@ function AnswerQuestion () {
                     <Row style={{margin:"0px"}}>
                         <Button type="submit" variant="light" className="border-dark">Submit</Button>
                         &nbsp; &nbsp;
-                        <Button variant="danger" className="border-dark">Nevermind</Button>
+                        <Button variant="danger" className="border-dark" onClick={()=>{history.push('/home')}}>Nevermind</Button>
                     </Row>
                 </Form>
+                </div>
             </Container>
 
         </div>

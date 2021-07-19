@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import logo from '../logo.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, FormControl, InputGroup} from "react-bootstrap";
+import {Button, Container, Row, Col, FormControl} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 import {Link, useHistory} from "react-router-dom";
@@ -48,31 +48,43 @@ function LandingPage () {
                 </Container>
             </div>
 
-            <div className="red-header table-responsive">
+            <div className="red-header">
                 <Container>
-                        <Row className="font-weight-bold" style={{display:"inline-block", backgroundColor:"white", borderRadius:"10px", padding:"7px", marginTop:"8px"}}>
-                            Log in or sign up to ask and answer !
+                        <Row className="font-weight-bold" style={{justifyContent:"center"}}>
+                            <p className="white-banner">Log in or sign up to ask and answer !</p>
                         </Row>
                 </Container>
             </div>
 
 
+            <div>
             <Container>
                 <Row>
-                    <Col style={{margin:"20px", borderRight:"1px solid black"}} className="restOfPage">
-                        <InputGroup className="w-100">
-                            <FormControl/>
-                            <Button variant="light" className="border-dark">Search</Button>
-                        </InputGroup>
+                    <Col style={{margin:"20px", marginRight:"15px", borderRight:"1px solid black"}} className="restOfPage">
+                        <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
+                            <Row>
+                                <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per keyword</p>
+                            </Row>
+                            <Row>
+                                <FormControl style={{width:"30vw"}}/>
+                                <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
+                            </Row>
+                        </div>
                     </Col>
-                    <Col style={{margin:"20px"}} className="restOfPage">
-                        <InputGroup className="w-100">
-                            <FormControl/>
-                            <Button variant="light" className="border-dark">Search</Button>
-                        </InputGroup>
+                    <Col style={{margin:"20px", marginLeft:"0px"}} className="restOfPage">
+                        <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
+                        <Row>
+                            <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per day</p>
+                        </Row>
+                        <Row>
+                            <FormControl style={{width:"30vw"}}/>
+                            <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
+                        </Row>
+                        </div>
                     </Col>
                 </Row>
             </Container>
+            </div>
 
         </div>
     )

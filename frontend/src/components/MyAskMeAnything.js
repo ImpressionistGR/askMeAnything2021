@@ -75,13 +75,13 @@ function MyAskMeAnything () {
                     <Row>
                         <Col>
                             <Link to="/ask">
-                                <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
+                                <Button type="submit" variant="primary" className="border-dark" style={{margin:"10px", float:"center"}}>Ask a question</Button>
                             </Link>
                         </Col>
 
                         <Col>
                             <Link to="/answer">
-                            <Button type="submit" variant="light" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
+                            <Button type="submit" variant="primary" className="border-dark" style={{margin:"10px", float:"center"}}>Answer a question</Button>
                             </Link>
                         </Col>
                     </Row>
@@ -89,22 +89,34 @@ function MyAskMeAnything () {
             </div>
 
 
-            <Container>
-                <Row>
-                    <Col style={{margin:"20px", borderRight:"1px solid black"}} className="restOfPage">
-                        <InputGroup className="w-100">
-                            <FormControl/>
-                            <Button variant="light" className="border-dark">Search</Button>
-                        </InputGroup>
-                    </Col>
-                    <Col style={{margin:"20px"}} className="restOfPage">
-                        <InputGroup className="w-100">
-                            <FormControl/>
-                            <Button variant="light" className="border-dark">Search</Button>
-                        </InputGroup>
-                    </Col>
-                </Row>
-            </Container>
+            <div>
+                <Container>
+                    <Row>
+                        <Col style={{margin:"20px", marginRight:"15px", borderRight:"1px solid black"}} className="restOfPage">
+                            <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
+                                <Row>
+                                    <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per keyword</p>
+                                </Row>
+                                <Row>
+                                    <FormControl style={{width:"30vw"}}/>
+                                    <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
+                                </Row>
+                            </div>
+                        </Col>
+                        <Col style={{margin:"20px", marginLeft:"0px"}} className="restOfPage">
+                            <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
+                                <Row>
+                                    <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per day</p>
+                                </Row>
+                                <Row>
+                                    <FormControl style={{width:"30vw"}}/>
+                                    <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
+                                </Row>
+                            </div>
+                        </Col>
+                    </Row>
+                </Container>
+            </div>
 
         </div>
     )
