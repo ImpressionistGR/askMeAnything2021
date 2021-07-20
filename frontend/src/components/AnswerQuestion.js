@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import {Button, Container, Row, Col, Form, FormControl, Dropdown} from "react-bootstrap";
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
+import axios from "axios";
 
 function AnswerQuestion () {
 
@@ -21,6 +22,50 @@ function AnswerQuestion () {
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
+    class Questions extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {questions: []}
+        }
+
+
+
+        componentDidMount() {
+            axios.post('/getQuestions').then(response => {
+                //console.log(response.data)
+                this.setState({questions: response.data})
+
+                //console.log("questions after change")
+                //console.log(this.state.questions)
+
+            })
+        }
+
+
+
+
+
+        render() {
+            return(
+                <div>
+                    <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
+                    {this.state.questions.map(question => <p className="questions text-dark">
+                        <p className="font-weight-bold" style={{fontSize:"20px"}}>
+                            {question.title}
+                        </p>
+
+                        <p className="question-text">{question.text}</p>
+                        <br/>
+                        <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
+                    </p>)}
+                </div>
+            )
+        }
+
+
+    }
+
     return (
         <div className="App">
             <div className="App-header">
@@ -31,8 +76,7 @@ function AnswerQuestion () {
                                 <img
                                     alt=""
                                     src={logo}
-                                    width="65"
-                                    height="65"
+                                    className="App-logo"
                                 />
                                 <span  style={{marginLeft:"5px"}} className="font-weight-bold">@ask</span>
                                 <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
@@ -42,20 +86,20 @@ function AnswerQuestion () {
                         </Col>
                         <Col>
                             <Link to="/">
-                                <Button style={{float:"right", margin:"10px", marginTop:"30px"}} variant="danger" className="border-dark" onClick={logout}>Log out</Button>
+                                <Button variant="danger" className="border-dark login-signup-buttons" onClick={logout}>Log out</Button>
                             </Link>
-                            <Dropdown  style={{float:"right", margin:"10px", marginTop:"30px"}} variant="light" className="border-dark" >
-                                <Dropdown.Toggle variant="light" className="border-dark">
+                            <Dropdown variant="light" className="border-dark" >
+                                <Dropdown.Toggle variant="light" className="border-dark my-ask-button">
                                     <img
                                         alt=""
                                         src={user}
                                         width="20"
                                         height="20"
                                     />
-                                    <span  style={{marginLeft:"5px"}} className="font-weight-bold">@myask</span>
-                                    <span className="font-weight-bold" style={{color:"#e30000"}}>me</span>
-                                    <span className="font-weight-bold">anything</span>
-                                    <span className="font-weight-bold" style={{color:"#e30000"}}>2021</span>
+                                    <span  style={{marginLeft:"5px"}} className="font-weight-bold my-ask-text">@myask</span>
+                                    <span className="font-weight-bold my-ask-text" style={{color:"#e30000"}}>me</span>
+                                    <span className="font-weight-bold my-ask-text">anything</span>
+                                    <span className="font-weight-bold my-ask-text" style={{color:"#e30000"}}>2021</span>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu className="border-dark">
                                     <Dropdown.Item>Username: {getCookie('username')}</Dropdown.Item>
@@ -75,7 +119,9 @@ function AnswerQuestion () {
             </div>
 
 
-            <Container className="restOfPage">
+            <Container className="restOfPage" style={{height:"100%"}}>
+                <div style={{border:"1px solid black", borderRadius:"10px", margin:"10px"}}>
+                    <div className="font-weight-bold" style={{textAlign:"center", marginTop:"40px"}}>Search a question by title and keyword</div>
                 <Form style={{display:"inline-block" ,width:"100%"}}>
                     <Row style={{ margin:"10px", marginTop:"25px"}}>
                         <FormControl placeholder="Keywords" />
@@ -90,9 +136,10 @@ function AnswerQuestion () {
                     </div>
 
                 </Form>
-
+                </div>
 
                 <div>
+                    <Questions/>
                 <Form>
                     <Row>
                         <FormControl as="textarea" placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>

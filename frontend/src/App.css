@@ -122,3 +122,30 @@
     font-size: 15px!important;
   }
 }
+
+
+.questions {
+  display: inline-block;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid black;
+  cursor: pointer;
+  padding: 10px;
+  margin: 20px;
+  width: auto;
+}
+
+.question-text{
+  display: inline-block;
+  background-color: lightgrey;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.question-author{
+  display: inline-block;
+  color: darkblue;
+  padding: 5px;
+  font-size: 15px;
+  margin: 0px;
+}

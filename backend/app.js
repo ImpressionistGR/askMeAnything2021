@@ -172,6 +172,18 @@ app.post('/askQuestion', (req, res)=>{
     //res.send('ok')
 })
 
+app.post('/getQuestions', (req, res) => {
+    connection.query(
+        'SELECT question.idquestion, question.title, question.text, question.timestamp, user.username, user.email ' +
+        'FROM question ' +
+        'INNER JOIN user ON question.user_iduser=user.iduser',
+        (err, result) => {
+            console.log(result)
+            res.send(result)
+        }
+    )
+})
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })
