@@ -30,6 +30,7 @@ function MyAskMeAnything () {
             super(props);
 
             this.state = {questions: []}
+            this.showAnswers = this.showAnswers.bind(this)
         }
 
 
@@ -37,6 +38,9 @@ function MyAskMeAnything () {
         componentDidMount() {
             axios.post('/getQuestions').then(response => {
                 //console.log(response.data)
+                response.data.forEach(question =>{
+                    question.answer = false
+                })
                 this.setState({questions: response.data})
 
                 //console.log("questions after change")
@@ -46,6 +50,21 @@ function MyAskMeAnything () {
         }
 
 
+        showAnswers(id) {
+            console.log(id)
+            for(let i in this.state.questions){
+                if(this.state.questions[i].idquestion === id){
+                    if(this.state.questions[i].answer === true){
+                        this.state.questions[i].answer = false
+                        this.forceUpdate()
+                    }
+                    else if(this.state.questions[i].answer === false){
+                        this.state.questions[i].answer = true
+                        this.forceUpdate()
+                    }
+                }
+            }
+        }
 
 
 
@@ -53,7 +72,10 @@ function MyAskMeAnything () {
             return(
                 <div style={{textAlign:"left"}}>
                     <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
-                    {this.state.questions.map(question => <p className="questions text-dark">
+                    {this.state.questions.map(question => <p onClick={() => {
+                        const id = question.idquestion
+                        this.showAnswers(id)}
+                    } className="questions text-dark">
                         <p className="font-weight-bold" style={{fontSize:"20px"}}>
                             {question.title}
                         </p>
@@ -62,6 +84,17 @@ function MyAskMeAnything () {
                         <br/>
                         <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
                         <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
+
+                        {question.answer &&
+                        <br/>
+                        }
+                        {question.answer &&
+                        <br/>
+                        }
+                        {question.answer &&
+                        <p className="font-weight-bold">Answers:</p>
+                        }
+
                     </p>)}
                 </div>
             )

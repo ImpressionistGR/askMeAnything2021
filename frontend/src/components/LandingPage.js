@@ -2,18 +2,23 @@ import React, {useState} from 'react';
 import logo from '../logo.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, FormControl} from "react-bootstrap";
+import {Button, Container, Row, Col, FormControl, Dropdown} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from "axios";
+import {forEach} from "react-bootstrap/ElementChildren";
+
+
 
 
 function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
+
+
 
     const history = useHistory()
 
@@ -25,6 +30,7 @@ function LandingPage () {
             super(props);
 
             this.state = {questions: []}
+            this.showAnswers = this.showAnswers.bind(this)
         }
 
 
@@ -32,6 +38,9 @@ function LandingPage () {
         componentDidMount() {
             axios.post('/getQuestions').then(response => {
                 //console.log(response.data)
+                response.data.forEach(question =>{
+                    question.answer = false
+                })
                 this.setState({questions: response.data})
 
                 //console.log("questions after change")
@@ -41,14 +50,31 @@ function LandingPage () {
         }
 
 
-
+        showAnswers(id) {
+            console.log(id)
+            for(let i in this.state.questions){
+                if(this.state.questions[i].idquestion === id){
+                    if(this.state.questions[i].answer === true){
+                        this.state.questions[i].answer = false
+                        this.forceUpdate()
+                    }
+                    else if(this.state.questions[i].answer === false){
+                        this.state.questions[i].answer = true
+                        this.forceUpdate()
+                    }
+                }
+           }
+        }
 
 
         render() {
             return(
                 <div style={{textAlign:"left"}}>
                     <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
-                    {this.state.questions.map(question => <p className="questions text-dark">
+                    {this.state.questions.map(question => <p onClick={() => {
+                        const id = question.idquestion
+                        this.showAnswers(id)}
+                    } className="questions text-dark">
                         <p className="font-weight-bold" style={{fontSize:"20px"}}>
                             {question.title}
                         </p>
@@ -57,7 +83,19 @@ function LandingPage () {
                         <br/>
                         <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
                         <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
-                    </p>)}
+
+                        {question.answer &&
+                            <br/>
+                        }
+                        {question.answer &&
+                            <br/>
+                        }
+                        {question.answer &&
+                            <p className="font-weight-bold">Answers:</p>
+                        }
+
+                    </p>
+                    )}
                 </div>
             )
         }
@@ -70,7 +108,7 @@ function LandingPage () {
             <div className="App-header">
                 <Container>
                     <Row>
-                        <Col>
+                        <Col sm={3.5}>
                             <Link className="nav-link text-dark text-decoration-none" to="/" style={{marginTop:"5px"}}>
                                 <img
                                     alt=""
