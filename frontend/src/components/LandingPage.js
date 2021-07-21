@@ -7,6 +7,8 @@ import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import axios from "axios";
 
 
 function LandingPage () {
@@ -18,6 +20,48 @@ function LandingPage () {
     if(getCookie('username') !== '' && getCookie('auth') === 'yes') history.push('/home')
     else document.cookie = 'auth=no'
 
+    class Questions extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {questions: []}
+        }
+
+
+
+        componentDidMount() {
+            axios.post('/getQuestions').then(response => {
+                //console.log(response.data)
+                this.setState({questions: response.data})
+
+                //console.log("questions after change")
+                console.log(this.state.questions)
+
+            })
+        }
+
+
+
+
+
+        render() {
+            return(
+                <div style={{textAlign:"left"}}>
+                    <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
+                    {this.state.questions.map(question => <p className="questions text-dark">
+                        <p className="font-weight-bold" style={{fontSize:"20px"}}>
+                            {question.title}
+                        </p>
+
+                        <p className="question-text">{question.text}</p>
+                        <br/>
+                        <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
+                        <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
+                    </p>)}
+                </div>
+            )
+        }
+    }
 
     return (
         <div className="App">
@@ -56,34 +100,23 @@ function LandingPage () {
             </div>
 
 
-            <div>
-            <Container>
+
+
+            <Container style={{marginTop:"20px", height:"300vh"}}>
                 <Row>
-                    <Col style={{margin:"20px", marginRight:"15px", borderRight:"1px solid black"}} className="restOfPage">
-                        <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
-                            <Row>
-                                <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per keyword</p>
-                            </Row>
-                            <Row>
-                                <FormControl style={{width:"30vw"}}/>
-                                <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
-                            </Row>
+                    <Col sm={4}>
+                        <div className="red-header" style={{borderRadius:"10px"}}>
+                            <p className="white-banner font-weight-bold">Charts</p>
                         </div>
                     </Col>
-                    <Col style={{margin:"20px", marginLeft:"0px"}} className="restOfPage">
-                        <div style={{display:"inline-block", borderBottom:"1px solid black", padding:"25px"}}>
-                        <Row>
-                            <p className="font-weight-bold" style={{fontSize:"18px"}}>Questions per day</p>
-                        </Row>
-                        <Row>
-                            <FormControl style={{width:"30vw"}}/>
-                            <Button style={{marginLeft:"10px"}} variant="light" className="border-dark">Search</Button>
-                        </Row>
+                    <Col sm={8}>
+                        <div className="red-header" style={{borderRadius:"10px"}}>
+                            <Questions/>
                         </div>
                     </Col>
                 </Row>
             </Container>
-            </div>
+
 
         </div>
     )

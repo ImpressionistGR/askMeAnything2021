@@ -140,6 +140,7 @@
   background-color: lightgrey;
   padding: 20px;
   border-radius: 10px;
+  white-space: pre-wrap;
 }
 
 .question-author{

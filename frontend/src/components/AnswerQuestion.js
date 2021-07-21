@@ -37,7 +37,7 @@ function AnswerQuestion () {
                 this.setState({questions: response.data})
 
                 //console.log("questions after change")
-                //console.log(this.state.questions)
+                console.log(this.state.questions)
 
             })
         }
@@ -58,6 +58,7 @@ function AnswerQuestion () {
                         <p className="question-text">{question.text}</p>
                         <br/>
                         <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
+                        <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
                     </p>)}
                 </div>
             )
