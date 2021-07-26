@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import logo from '../logo.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, FormControl, Dropdown} from "react-bootstrap";
+import {Button, Container, Row, Col, FormControl, Dropdown, Form} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
 import {Link, useHistory} from "react-router-dom";
@@ -84,15 +84,31 @@ function LandingPage () {
                         <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
                         <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
 
-                        {question.answer &&
-                            <br/>
-                        }
+                        <div style={{cursor:"auto"}} onClick={() => {
+                            const id = question.idquestion
+                            this.showAnswers(id)}}>
+
                         {question.answer &&
                             <br/>
                         }
                         {question.answer &&
                             <p className="font-weight-bold">Answers:</p>
                         }
+                        {question.answer &&
+                        <Form>
+                            <Row>
+                                <FormControl as="textarea" placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
+                            </Row>
+                            <Row style={{margin:"0px"}}>
+                                <Button type="submit" variant="light" className="border-dark">Submit</Button>
+                                &nbsp; &nbsp;
+                                <Button variant="danger" className="border-dark" onClick={() => {
+                                    const id = question.idquestion
+                                    this.showAnswers(id)}}>Nevermind</Button>
+                            </Row>
+                        </Form>
+                        }
+                        </div>
 
                     </p>
                     )}

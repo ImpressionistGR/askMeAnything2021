@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
@@ -21,6 +21,54 @@ function AnswerQuestion () {
         console.log('cookie: ' + document.cookie)
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
+
+    function answer() {
+        console.log('function answer says hi')
+    }
+
+    class AnswerForm extends React.Component{
+        constructor(props) {
+            super(props);
+
+            this.state = { text: ''}
+
+            this.handleChangeText = this.handleChangeText.bind(this)
+
+            this.handleSubmit = this.handleSubmit.bind(this)
+        }
+
+
+        handleChangeText(event){
+            this.setState({text: event.target.value})
+        }
+
+
+        handleSubmit(event){
+            if(!this.state.text.trim()){
+                alert('empty answers are not any helpful')
+            }
+            else{
+                answer()
+            }
+            event.preventDefault();
+        }
+
+
+        render() {
+            return (
+                <Form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <FormControl as="textarea" value={this.state.text} onChange={this.handleChangeText} placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
+                    </Row>
+                    <Row style={{margin:"0px"}}>
+                        <Button type="submit" variant="light" className="border-dark">Submit</Button>
+                        &nbsp; &nbsp;
+                    </Row>
+                </Form>
+            )
+        }
+    }
+
 
     class Questions extends React.Component {
         constructor(props) {
@@ -81,15 +129,28 @@ function AnswerQuestion () {
                         <p className="question-author">Author: {question.username} &nbsp; &nbsp; &nbsp; Email: {question.email}</p>
                         <p className="question-author" style={{float:"right"}}>Date: {question.timestamp.substring(0, 10) }</p>
 
+                        <div style={{cursor:"auto"}} onClick={() => {
+                            const id = question.idquestion
+                            this.showAnswers(id)}}>
+
                         {question.answer &&
-                        <br/>
+                            <br/>
                         }
                         {question.answer &&
-                        <br/>
+                            <p className="font-weight-bold">Answers:</p>
                         }
                         {question.answer &&
-                        <p className="font-weight-bold">Answers:</p>
+                            <AnswerForm/>
                         }
+                        {question.answer &&
+                            <br/>
+                        }
+                        {question.answer &&
+                            <Button variant="danger" className="border-dark" onClick={() => {
+                                const id = question.idquestion
+                                this.showAnswers(id)}}>Nevermind</Button>
+                        }
+                        </div>
 
                     </p>)}
                 </div>
@@ -173,16 +234,7 @@ function AnswerQuestion () {
 
                 <div>
                     <Questions/>
-                <Form>
-                    <Row>
-                        <FormControl as="textarea" placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
-                    </Row>
-                    <Row style={{margin:"0px"}}>
-                        <Button type="submit" variant="light" className="border-dark">Submit</Button>
-                        &nbsp; &nbsp;
-                        <Button variant="danger" className="border-dark" onClick={()=>{history.push('/home')}}>Nevermind</Button>
-                    </Row>
-                </Form>
+
                 </div>
             </Container>
 
