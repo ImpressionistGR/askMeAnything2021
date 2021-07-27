@@ -184,6 +184,43 @@ app.post('/getQuestions', (req, res) => {
     )
 })
 
+
+app.post('/getAnswers', (req, res) => {
+    connection.query(
+        'SELECT answer.idanswer, answer.text, answer.timestamp, answer.question_idquestion, user.username, user.email ' +
+        'FROM answer ' +
+        'INNER JOIN user ON answer.user_iduser=user.iduser',
+        (err, result) => {
+            console.log(result)
+            res.send(result)
+        }
+    )
+})
+
+
+app.post('/answer', (req, res) => {
+    const iduser = req.body.iduser
+    const text = req.body.text
+    const questionId = req.body.questionId
+    const dateTime = new Date
+
+    console.log(iduser)
+    console.log(text)
+    console.log(questionId)
+    console.log(dateTime)
+
+    connection.query(
+        'INSERT INTO answer (idanswer, text, timestamp, user_iduser, question_idquestion) VALUES (NULL, ?, ?, ?, ?)',
+        [text, dateTime, iduser, questionId],
+        (err, result) => {
+            console.log(result)
+            res.send(result)
+        }
+    )
+
+
+})
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })

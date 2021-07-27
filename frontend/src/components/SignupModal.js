@@ -19,8 +19,8 @@ function SignupModal ( {myShow, onClose} ){
                 //console.log(response.data.affectedRows)
                 const data = response.data.affectedRows
                 if (data === 0) {
-                    alert('wrong credentials')
-                    console.log('wrong credentials')
+                    alert('signup failed')
+                    console.log('signup failed')
                 } else {
                     alert('signup successful')
                     console.log('signup successful')

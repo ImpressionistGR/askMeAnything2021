@@ -22,8 +22,60 @@ function LandingPage () {
 
     const history = useHistory()
 
+    let questionId = 0  //variable for sumbitting on the right question Id
+
     if(getCookie('username') !== '' && getCookie('auth') === 'yes') history.push('/home')
     else document.cookie = 'auth=no'
+
+
+    function answer() {
+        console.log('function answer says hi')
+        console.log(questionId)
+    }
+
+    class AnswerForm extends React.Component{
+        constructor(props) {
+            super(props);
+
+            this.state = { text: ''}
+
+            this.handleChangeText = this.handleChangeText.bind(this)
+
+            this.handleSubmit = this.handleSubmit.bind(this)
+        }
+
+
+        handleChangeText(event){
+            this.setState({text: event.target.value})
+        }
+
+
+        handleSubmit(event){
+            if(!this.state.text.trim()){
+                alert('empty answers are not any helpful')
+            }
+            else{
+                answer()
+            }
+            event.preventDefault();
+        }
+
+
+        render() {
+            return (
+                <Form onSubmit={this.handleSubmit}>
+                    <Row>
+                        <FormControl as="textarea" value={this.state.text} onChange={this.handleChangeText} placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
+                    </Row>
+                    <Row style={{margin:"0px"}}>
+                        <Button type="submit" variant="light" className="border-dark">Submit</Button>
+                        &nbsp; &nbsp;
+                    </Row>
+                </Form>
+            )
+        }
+    }
+
 
     class Questions extends React.Component {
         constructor(props) {
@@ -40,6 +92,7 @@ function LandingPage () {
                 //console.log(response.data)
                 response.data.forEach(question =>{
                     question.answer = false
+                    question.answersList = []
                 })
                 this.setState({questions: response.data})
 
@@ -47,6 +100,22 @@ function LandingPage () {
                 console.log(this.state.questions)
 
             })
+
+            axios.post('/getAnswers').then(response => {
+                console.log(response.data)
+
+                response.data.forEach(answer => {
+                    for(let i in this.state.questions){
+                        if(this.state.questions[i].idquestion === answer.question_idquestion){
+                            this.state.questions[i].answersList.push(answer)
+                        }
+                    }
+                })
+
+            })
+
+            //this.state.question.answersList = []
+            //console.log(this.state.questions)
         }
 
 
@@ -63,7 +132,7 @@ function LandingPage () {
                         this.forceUpdate()
                     }
                 }
-           }
+            }
         }
 
 
@@ -88,26 +157,31 @@ function LandingPage () {
                             const id = question.idquestion
                             this.showAnswers(id)}}>
 
-                        {question.answer &&
+                            {question.answer &&
                             <br/>
-                        }
-                        {question.answer &&
+                            }
+                            {question.answer &&
                             <p className="font-weight-bold">Answers:</p>
-                        }
-                        {question.answer &&
-                        <Form>
-                            <Row>
-                                <FormControl as="textarea" placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
-                            </Row>
-                            <Row style={{margin:"0px"}}>
-                                <Button type="submit" variant="light" className="border-dark">Submit</Button>
-                                &nbsp; &nbsp;
-                                <Button variant="danger" className="border-dark" onClick={() => {
-                                    const id = question.idquestion
-                                    this.showAnswers(id)}}>Nevermind</Button>
-                            </Row>
-                        </Form>
-                        }
+                            }
+                            {question.answer &&
+                            <Container>{question.answersList.map(answer => <Row><div style={{margin:"10px"}} className="question-text">
+                                    {answer.text}
+                                    <br/>
+                                    <br/>
+                                    <p className="question-author">Author: {answer.username} &nbsp; &nbsp; &nbsp; Email: {answer.email}</p>
+                                    <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {question.timestamp.substring(0, 10) }</p>
+                                </div>
+                                </Row>
+                            )}</Container>
+                            }
+                            {question.answer &&
+                            <br/>
+                            }
+                            {question.answer &&
+                            <Button variant="danger" className="border-dark" onClick={() => {
+                                const id = question.idquestion
+                                this.showAnswers(id)}}>Close</Button>
+                            }
                         </div>
 
                     </p>

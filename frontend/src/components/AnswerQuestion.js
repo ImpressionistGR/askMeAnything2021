@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import logo from '../logo.png';
 import user from '../user.png';
 import '../App.css';
@@ -12,18 +12,38 @@ function AnswerQuestion () {
 
     const history = useHistory();
 
+    let questionId = 0  //variable for sumbitting on the right question Id
+
     //const auth = cookies.get('auth')
     if(getCookie('auth') === 'no' || getCookie('auth') === ''){
         history.push('/')
     }
+
 
     function logout() {
         console.log('cookie: ' + document.cookie)
         document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
 
-    function answer() {
+    function answer(text) {
         console.log('function answer says hi')
+        console.log(questionId)
+        const iduser = getCookie('iduser')
+        console.log(iduser)
+
+        axios.post(
+            '/answer', {text, iduser, questionId}).then(response =>{
+            console.log(response)
+            const data = response.data.affectedRows
+            if (data === 0) {
+                alert('answer failed')
+                console.log('answer failed')
+            } else {
+                alert('answer successful')
+                console.log('answer successful')
+
+            }
+        })
     }
 
     class AnswerForm extends React.Component{
@@ -48,7 +68,8 @@ function AnswerQuestion () {
                 alert('empty answers are not any helpful')
             }
             else{
-                answer()
+                answer(this.state.text)
+                history.push('/answer')
             }
             event.preventDefault();
         }
@@ -75,6 +96,7 @@ function AnswerQuestion () {
             super(props);
 
             this.state = {questions: []}
+
             this.showAnswers = this.showAnswers.bind(this)
         }
 
@@ -85,6 +107,7 @@ function AnswerQuestion () {
                 //console.log(response.data)
                 response.data.forEach(question =>{
                     question.answer = false
+                    question.answersList = []
                 })
                 this.setState({questions: response.data})
 
@@ -92,10 +115,28 @@ function AnswerQuestion () {
                 console.log(this.state.questions)
 
             })
+
+            axios.post('/getAnswers').then(response => {
+                console.log(response.data)
+
+                response.data.forEach(answer => {
+                    for(let i in this.state.questions){
+                        if(this.state.questions[i].idquestion === answer.question_idquestion){
+                            this.state.questions[i].answersList.push(answer)
+                        }
+                    }
+                })
+
+            })
+
+            //this.state.question.answersList = []
+            //console.log(this.state.questions)
         }
 
+
+
         showAnswers(id) {
-            console.log(id)
+            //console.log(id)
             for(let i in this.state.questions){
                 if(this.state.questions[i].idquestion === id){
                     if(this.state.questions[i].answer === true){
@@ -116,9 +157,10 @@ function AnswerQuestion () {
             return(
                 <div>
                     <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
-                    {this.state.questions.map(question => <p onClick={() => {
+                    {this.state.questions.map(question => <div onClick={() => {
                         const id = question.idquestion
-                        this.showAnswers(id)}
+                        this.showAnswers(id)
+                        questionId = id}
                     } className="questions text-dark">
                         <p className="font-weight-bold" style={{fontSize:"20px"}}>
                             {question.title}
@@ -140,6 +182,17 @@ function AnswerQuestion () {
                             <p className="font-weight-bold">Answers:</p>
                         }
                         {question.answer &&
+                            <Container>{question.answersList.map(answer => <Row><div style={{margin:"10px"}} className="question-text">
+                                {answer.text}
+                                <br/>
+                                <br/>
+                                <p className="question-author">Author: {answer.username} &nbsp; &nbsp; &nbsp; Email: {answer.email}</p>
+                                <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {question.timestamp.substring(0, 10) }</p>
+                            </div>
+                                </Row>
+                            )}</Container>
+                        }
+                        {question.answer &&
                             <AnswerForm/>
                         }
                         {question.answer &&
@@ -152,7 +205,7 @@ function AnswerQuestion () {
                         }
                         </div>
 
-                    </p>)}
+                    </div>)}
                 </div>
             )
         }
@@ -234,7 +287,6 @@ function AnswerQuestion () {
 
                 <div>
                     <Questions/>
-
                 </div>
             </Container>
 
