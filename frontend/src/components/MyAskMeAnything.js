@@ -8,12 +8,23 @@ import {Button, Container, Row, Col, FormControl, InputGroup, DropdownButton, Dr
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
 import axios from "axios";
+import {Bars, Chart, Layer, Ticks} from "rumble-charts";
+import KeywordsChart from "./KeywordsChart";
+import QuestionsChart from "./QuestionsChart";
 
 
 
 function MyAskMeAnything () {
 
     const history = useHistory();
+
+    const series = [{
+        data: [
+            {y:20, color: '#4c8df5', label: 'a'},
+            {y:100, color: '#91bcff', label: 'b'},
+            {y:70, color: '#ff822e', label: 'c'}
+        ]
+    }];
 
     let questionId = 0  //variable for sumbitting on the right question Id
 
@@ -277,19 +288,31 @@ function MyAskMeAnything () {
             </div>
 
 
-            <Container style={{marginTop:"20px", height:"300vh"}}>
+            <Container  style={{marginTop:"20px", height:"400vh"}}>
+                <Row className="red-header justify-content-center" style={{borderRadius:"10px"}}>
+                    <div style={{borderRadius:"10px"}}>
+                        <p className="white-banner font-weight-bold">Charts</p>
+                    </div>
+                </Row>
                 <Row>
-                    <Col sm={4}>
-                        <div className="red-header" style={{borderRadius:"10px"}}>
-                            <p className="white-banner font-weight-bold">Charts</p>
-                        </div>
+                    <Col>
+                        <KeywordsChart/>
                     </Col>
-                    <Col sm={8}>
-                        <div className="red-header" style={{borderRadius:"10px"}}>
-                            <Questions/>
-                        </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Col>
+                        <QuestionsChart/>
                     </Col>
                 </Row>
+                <Row>
+                    <div className="red-header" style={{borderRadius:"10px"}}>
+                        <Questions/>
+                    </div>
+                </Row>
+
             </Container>
 
         </div>

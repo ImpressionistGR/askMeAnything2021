@@ -221,6 +221,35 @@ app.post('/answer', (req, res) => {
 
 })
 
+app.post('/getPopularKeywords', (req, res) => {
+    connection.query(
+        'SELECT name, COUNT(*) AS freq\n' +
+        'FROM askdb.keyword\n' +
+        'GROUP BY name\n' +
+        'ORDER BY freq DESC\n' +
+        'LIMIT 3',
+        (err, result) => {
+            console.log(result)
+            res.send(result)
+        }
+    )
+})
+
+
+app.post('/getPopularQuestions', (req, res) => {
+    connection.query(
+        'SELECT date(timestamp) AS date, COUNT(*) AS freq\n' +
+        'FROM askdb.question\n' +
+        'GROUP BY date(timestamp)\n' +
+        'ORDER BY freq DESC\n' +
+        'LIMIT 3',
+        (err, result) => {
+            console.log(result)
+            res.send(result)
+        }
+    )
+})
+
 app.listen(port, () => {
   console.log(`App listening at http://localhost:${port}`)
 })

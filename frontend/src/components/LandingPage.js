@@ -2,14 +2,25 @@ import React, {useState} from 'react';
 import logo from '../logo.png';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Container, Row, Col, FormControl, Dropdown, Form} from "react-bootstrap";
+import {Button, Container, Row, Col} from "react-bootstrap";
 import LoginModal from "./LoginModal";
 import SignupModal from "./SignupModal";
+import QuestionsChart from "./QuestionsChart";
+import KeywordsChart from "./KeywordsChart";
 import {Link, useHistory} from "react-router-dom";
 import {getCookie} from "../cookies";
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import axios from "axios";
 import {forEach} from "react-bootstrap/ElementChildren";
+import {
+    // main component
+    Chart,
+    // graphs
+    Bars, Cloud, Dots, Labels, Lines, Pies, RadialLines, Ticks, Title,
+    // wrappers
+    Layer, Animate, Transform, Handlers,
+    // helpers
+    helpers, DropShadow, Gradient
+} from 'rumble-charts';
 
 
 
@@ -18,63 +29,14 @@ function LandingPage () {
     const [loginShow, setLoginShow] = useState(false)
     const [signupShow, setSignupShow] = useState(false)
 
-
-
     const history = useHistory()
 
-    let questionId = 0  //variable for sumbitting on the right question Id
 
     if(getCookie('username') !== '' && getCookie('auth') === 'yes') history.push('/home')
     else document.cookie = 'auth=no'
 
 
-    function answer() {
-        console.log('function answer says hi')
-        console.log(questionId)
-    }
 
-    class AnswerForm extends React.Component{
-        constructor(props) {
-            super(props);
-
-            this.state = { text: ''}
-
-            this.handleChangeText = this.handleChangeText.bind(this)
-
-            this.handleSubmit = this.handleSubmit.bind(this)
-        }
-
-
-        handleChangeText(event){
-            this.setState({text: event.target.value})
-        }
-
-
-        handleSubmit(event){
-            if(!this.state.text.trim()){
-                alert('empty answers are not any helpful')
-            }
-            else{
-                answer()
-            }
-            event.preventDefault();
-        }
-
-
-        render() {
-            return (
-                <Form onSubmit={this.handleSubmit}>
-                    <Row>
-                        <FormControl as="textarea" value={this.state.text} onChange={this.handleChangeText} placeholder="Your answer here..." style={{margin:"15px", height:"100px"}}/>
-                    </Row>
-                    <Row style={{margin:"0px"}}>
-                        <Button type="submit" variant="light" className="border-dark">Submit</Button>
-                        &nbsp; &nbsp;
-                    </Row>
-                </Form>
-            )
-        }
-    }
 
 
     class Questions extends React.Component {
@@ -227,22 +189,31 @@ function LandingPage () {
                 </Container>
             </div>
 
-
-
-
-            <Container style={{marginTop:"20px", height:"300vh"}}>
+            <Container  style={{marginTop:"20px", height:"400vh"}}>
+                <Row className="red-header justify-content-center" style={{borderRadius:"10px"}}>
+                    <div style={{borderRadius:"10px"}}>
+                        <p className="white-banner font-weight-bold">Charts</p>
+                    </div>
+                </Row>
                 <Row>
-                    <Col sm={4}>
-                        <div className="red-header" style={{borderRadius:"10px"}}>
-                            <p className="white-banner font-weight-bold">Charts</p>
-                        </div>
+                    <Col>
+                        <KeywordsChart/>
                     </Col>
-                    <Col sm={8}>
-                        <div className="red-header" style={{borderRadius:"10px"}}>
-                            <Questions/>
-                        </div>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <Col>
+                        <QuestionsChart/>
                     </Col>
                 </Row>
+                <Row>
+                    <div className="red-header" style={{borderRadius:"10px"}}>
+                        <Questions/>
+                    </div>
+                </Row>
+
             </Container>
 
 

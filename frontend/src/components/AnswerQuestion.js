@@ -187,7 +187,7 @@ function AnswerQuestion () {
                                 <br/>
                                 <br/>
                                 <p className="question-author">Author: {answer.username} &nbsp; &nbsp; &nbsp; Email: {answer.email}</p>
-                                <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {question.timestamp.substring(0, 10) }</p>
+                                <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {answer.timestamp.substring(0, 10) }</p>
                             </div>
                                 </Row>
                             )}</Container>
@@ -267,7 +267,7 @@ function AnswerQuestion () {
 
 
             <Container className="restOfPage" style={{height:"100%"}}>
-                <div style={{border:"1px solid black", borderRadius:"10px", margin:"10px"}}>
+                {/*<div style={{border:"1px solid black", borderRadius:"10px", margin:"10px"}}>
                     <div className="font-weight-bold" style={{textAlign:"center", marginTop:"40px"}}>Search a question by title and keyword</div>
                 <Form style={{display:"inline-block" ,width:"100%"}}>
                     <Row style={{ margin:"10px", marginTop:"25px"}}>
@@ -283,9 +283,9 @@ function AnswerQuestion () {
                     </div>
 
                 </Form>
-                </div>
+                </div>*/}
 
-                <div>
+                <div style={{marginTop:"30px"}}>
                     <Questions/>
                 </div>
             </Container>
