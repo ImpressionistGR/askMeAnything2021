@@ -206,6 +206,17 @@ function AnswerQuestion () {
                         </div>
 
                     </div>)}
+                    <div className="copyright">
+                        <img
+                            style={{float:'left'}}
+                            src={logo}
+                            alt=""
+                            height="26px"
+                            width="26px"
+                        />
+                        <p style={{float:'left'}}>&nbsp;&nbsp;Copyright &copy; 2021</p>
+                        <p style={{float:'right'}}>made by Billys</p>
+                    </div>
                 </div>
             )
         }

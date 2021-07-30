@@ -100,7 +100,7 @@ function LandingPage () {
 
         render() {
             return(
-                <div style={{textAlign:"left"}}>
+                <div style={{backgroundColor:"#d3f5ff", textAlign:"left"}}>
                     <p className="red-header" style={{borderRadius:"10px"}}><p className="white-banner font-weight-bold">Questions Overview</p></p>
                     {this.state.questions.map(question => <p onClick={() => {
                         const id = question.idquestion
@@ -148,7 +148,19 @@ function LandingPage () {
 
                     </p>
                     )}
+                    <div className="copyright">
+                        <img
+                            style={{float:'left'}}
+                            src={logo}
+                            alt=""
+                            height="26px"
+                            width="26px"
+                        />
+                        <p style={{float:'left'}}>&nbsp;&nbsp;Copyright &copy; 2021</p>
+                        <p style={{float:'right'}}>made by Billys</p>
+                    </div>
                 </div>
+
             )
         }
     }
@@ -189,7 +201,8 @@ function LandingPage () {
                 </Container>
             </div>
 
-            <Container  style={{marginTop:"20px", height:"400vh"}}>
+
+            <Container  style={{marginTop:"20px"}}>
                 <Row className="red-header justify-content-center" style={{borderRadius:"10px"}}>
                     <div style={{borderRadius:"10px"}}>
                         <p className="white-banner font-weight-bold">Charts</p>
@@ -215,6 +228,8 @@ function LandingPage () {
                 </Row>
 
             </Container>
+
+
 
 
         </div>

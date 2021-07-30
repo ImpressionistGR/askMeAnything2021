@@ -177,6 +177,18 @@ function AskQuestion () {
                 <AskForm/>
             </Container>
 
+            <div style={{bottom:0, position:"absolute", width:"90%", paddingBottom:"0px", marginLeft:"5%", marginRight:"5%"}} className="copyright">
+                <img
+                    style={{float:'left'}}
+                    src={logo}
+                    alt=""
+                    height="26px"
+                    width="26px"
+                />
+                <p style={{float:'left'}}>&nbsp;&nbsp;Copyright &copy; 2021</p>
+                <p style={{float:'right'}}>made by Billys</p>
+            </div>
+
         </div>
     )
 }
