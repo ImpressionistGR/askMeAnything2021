@@ -131,7 +131,7 @@ function LandingPage () {
                                     <br/>
                                     <br/>
                                     <p className="question-author">Author: {answer.username} &nbsp; &nbsp; &nbsp; Email: {answer.email}</p>
-                                    <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {question.timestamp.substring(0, 10) }</p>
+                                    <p className="question-author" style={{float:"right"}}>&nbsp; &nbsp; &nbsp;Date: {answer.timestamp.substring(0, 10) }</p>
                                 </div>
                                 </Row>
                             )}</Container>
